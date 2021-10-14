@@ -1,6 +1,6 @@
 const player1 = {
     name: 'KITANA',
-    hp: 100,
+    hp: 50,
     img: 'http://reactmarathon-api.herokuapp.com/assets/kitana.gif',
     weapon: ['palka'],
     attack: function(){
@@ -8,83 +8,52 @@ const player1 = {
     }
     };
     
-    const player2 = {
-        name: 'SCORPION',
-    hp: 100,
+const player2 = {
+    name: 'SCORPION',
+    hp: 80,
     img: 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif',
     weapon: ['palka'],
     attack: function(){
         console.log(this.name + ' ' + 'Fight...')
     }
     };
+
     
-    function createPlayer(){
-        const $player1 = document.createElement('div');
-        $player1.classList.add('player1');
-
-        const $player2 = document.createElement('div');
-        $player2.classList.add('player2')
+    
+    function createPlayer(playerClass, playerName, hp, img){
+        const $player = document.createElement('div');
+        $player.classList.add(playerClass);
         
-        const $progressbar1 = document.createElement('div');
-        $progressbar1.classList.add('progressbar');
+        const $progressbar = document.createElement('div');
+        $progressbar.classList.add('progressbar');
 
-        const $progressbar2 = document.createElement('div');
-        $progressbar2.classList.add('progressbar');
+        const $life = document.createElement('div');
+        $life.classList.add('life');
+        $life.style.width = hp+'%';
 
-        const $life1 = document.createElement('div');
-        $life1.classList.add('life');
-        $life1.style.width = '100%';
+        const $name = document.createElement('div');
+        $name.classList.add('name');
+        $name.innerText = playerName;
 
-        const $life2 = document.createElement('div');
-        $life2.classList.add('life');
-        $life2.style.width = '100%';
+        const $character = document.createElement('div');
+        $character.classList.add('character')
 
-        const $name1 = document.createElement('div');
-        $name1.classList.add('name');
-        $name1.innerText = player1.name;
-
-        const $name2 = document.createElement('div');
-        $name2.classList.add('name');
-        $name2.innerText = player2.name;
-
-        const $character1 = document.createElement('div');
-        $character1.classList.add('character')
-
-        const $character2 = document.createElement('div');
-        $character2.classList.add('character')
-
-        const $img1 = document.createElement('img');
-        $img1.src = player1.img;
-
-        const $img2 = document.createElement('img');
-        $img2.src = player2.img;
+        const $img = document.createElement('img');
+        $img.src = img;
         
         const $arena = document.querySelector('.arenas');
-        $arena.appendChild($player1);
-        $arena.appendChild($player2);
+        $arena.appendChild($player);
 
-        const $p1 = document.querySelector('.player1');
-        $p1.appendChild($progressbar1);
-        $p1.appendChild($character1);
+        const $p = document.querySelector('.'+playerClass);
+        $p.appendChild($progressbar);
+        $p.appendChild($character);
 
-        const $p2 = document.querySelector('.player2');
-        $p2.appendChild($progressbar2);
-        $p2.appendChild($character2);
+        $progressbar.appendChild($name);
+        $progressbar.appendChild($life);
 
-        const $progress1 = document.querySelector('.player1 .progressbar');
-        $progress1.appendChild($life1);
-        $progress1.appendChild($name1);
+        $character.appendChild($img);
 
-        const $progress2 = document.querySelector('.player2 .progressbar');
-        $progress2.appendChild($life2);
-        $progress2.appendChild($name2);
-
-        const $characterr1 = document.querySelector('.player1 .character');
-        $characterr1.appendChild($img1);
-
-        const $characterr2 = document.querySelector('.player2 .character');
-        $characterr2.appendChild($img2);
     };
 
-    createPlayer('player1', 'KITANA', 50); 
-    createPlayer('player2', 'SCORPION', 80); 
+    createPlayer('player1', player1.name, player1.hp, player1.img); 
+    createPlayer('player2', player2.name, player2.hp, player2.img); 
